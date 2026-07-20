@@ -1,0 +1,25 @@
+Package: autoEnrich
+Title: Recurrent Pathway Enrichment Across a Threshold Sweep
+Version: 0.1.0
+Authors@R: person("Your", "Name", email = "you@example.com", role = c("aut", "cre"))
+Description: Sweeps a numeric column (e.g. log fold-change) across a range
+    of thresholds, runs EnrichR pathway enrichment on the resulting gene
+    set at each threshold, and plots which pathways recur across multiple
+    thresholds. Useful for checking how stable an enrichment result is to
+    the exact cutoff used, rather than relying on a single arbitrary
+    threshold.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Imports:
+    enrichR,
+    dplyr,
+    tidyr,
+    purrr,
+    ggplot2,
+    magrittr,
+    stats
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Config/roxygen2/version: 8.0.0
