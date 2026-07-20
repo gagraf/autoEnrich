@@ -3,24 +3,15 @@
 Sweeps a numeric column (e.g. log fold-change) across a range of
 thresholds, runs EnrichR pathway enrichment on the resulting gene set at
 each threshold, and plots which pathways recur across multiple
-thresholds.
+thresholds. Useful for checking how stable an enrichment result is to
+the exact cutoff used, rather than relying on a single arbitrary
+threshold.
 
 ## Installation
 
-Once this package is on GitHub (see "Publishing" below), anyone can
-install it with:
-
 ```r
 # install.packages("devtools")
-devtools::install_github("yourusername/autoEnrich")
-```
-
-For local development / before it's on GitHub, from inside this folder:
-
-```r
-# install.packages(c("devtools", "roxygen2"))
-devtools::document()   # (re)generates NAMESPACE and man/ pages from roxygen comments
-devtools::install()    # builds and installs the package into your R library
+devtools::install_github("gagraf/autoEnrich")
 ```
 
 ## Usage
@@ -41,31 +32,21 @@ plot
 
 See `?enrichR_summary` for full argument documentation once installed.
 
-## Publishing so others can install it
+## Arguments
 
-1. Create a new GitHub repo (e.g. `autoEnrich`) and push this folder to it:
+| Argument | Description |
+|---|---|
+| `matrix` | data.frame/tibble with a gene column and a numeric column to threshold on |
+| `gene_column` | name of the column holding gene/feature IDs |
+| `threshold_column` | name of the numeric column to threshold on |
+| `threshold_sequence` | `c(start, end, by)` passed to `seq()` |
+| `database` | single EnrichR database name, e.g. `"WikiPathways_2024_Mouse"` |
+| `directions` | `"Positive"`, `"Negative"`, and/or `"None"` (magnitude only, ignores sign) |
+| `threshold_type` | `"adj_pvalue_0.05"` (default) or `"pvalue_0.01"` |
+| `min_genes` | minimum genes required at a threshold/direction to run enrichment (default 5) |
+| `clean_gene_ids` | strip everything after `"_"` in gene IDs before enrichment (default TRUE) |
 
-   ```bash
-   cd autoEnrich
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/yourusername/autoEnrich.git
-   git push -u origin main
-   ```
+## Requirements
 
-2. Anyone with R can then run:
-
-   ```r
-   devtools::install_github("yourusername/autoEnrich")
-   ```
-
-   No CRAN submission needed for this to work — `install_github` builds
-   straight from the repo.
-
-3. (Optional) If you want it discoverable/installable via
-   `install.packages("autoEnrich")` for anyone, that requires a CRAN
-   submission, which has its own review process and stricter
-   requirements (examples that run in under 5s, full test coverage,
-   etc.). Most lab/internal tools stop at GitHub distribution.
+- Internet access (calls the EnrichR API)
+- R packages: `enrichR`, `dplyr`, `tidyr`, `purrr`, `ggplot2` (installed automatically as dependencies)
