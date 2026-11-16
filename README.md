@@ -18,6 +18,7 @@ devtools::install_github("gagraf/autoEnrich")
 
 ```r
 library(autoEnrich)
+library(enrichR)
 
 plot <- enrichR_summary(
   matrix             = my_matrix,
